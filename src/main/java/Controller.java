@@ -82,7 +82,7 @@ public class Controller {
 
     /**
      * Listener for enter key, updates the image if enter is pressed
-     * @param ke
+     * @param ke a KeyEvent
      * @throws IOException
      */
     public void textEnter(KeyEvent ke) throws IOException {
@@ -131,7 +131,7 @@ public class Controller {
 
         double deltaX = ((pointerXStart - e.getX()));
         double deltaY = ((pointerYStart - e.getY()));
-        ComplexNumber newCentrePoint = Mandelbrot.PixelToComplexNumber(
+        ComplexNumber newCentrePoint = MandelbrotModel.PixelToComplexNumber(
                 (int) deltaX, (int) deltaY,
                 new ComplexNumber(Double.parseDouble(xCoordinateText.getText()),
                         Double.parseDouble(yCoordinateText.getText())), Double.parseDouble(magnifierText.getText()),
@@ -166,8 +166,8 @@ public class Controller {
         int i = (int) (512 + (magfac * 0.0005));
         int width = 512;
         int height = 512;
-        Mandelbrot.make(width, height, i, magfac, new ComplexNumber(x, y));
-        img.setImage(SwingFXUtils.toFXImage(Mandelbrot.getImage().getBufImg(), null));
+        MandelbrotModel.make(width, height, i, magfac, new ComplexNumber(x, y));
+        img.setImage(SwingFXUtils.toFXImage(MandelbrotModel.getImage().getBufImg(), null));
     }
 
     /**
@@ -179,7 +179,7 @@ public class Controller {
         String s;
         s = "mandelbrot@" + xCoordinateText.getText().substring(0, 5) + ";" + yCoordinateText.getText().substring(0, 5) + ";" +
                 magnifierText.getText() + ";" + (int) (512 + Double.parseDouble(magnifierText.getText()) * 0.01);
-        Mandelbrot.getImage().saveAsPNG(s);
+        MandelbrotModel.getImage().saveAsPNG(s);
     }
 
 }

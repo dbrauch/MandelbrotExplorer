@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.stream.IntStream;
 
 //this should be a singleton
-public class Mandelbrot {
+public class MandelbrotModel {
     private static final int x_ratio = 2;
     private static final int y_ratio = 1;
     private static final ComplexNumber z0 = new ComplexNumber(0,0);
