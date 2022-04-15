@@ -3,73 +3,81 @@
  * A class representing Complex Numbers
  */
 //Todo: should this extend Number?
-public class ComplexNumber extends Number{
-    final double r;
-    final double ri;
+public class ComplexNumber extends Number {
+    private final double real;
+    private final double imaginary;
 
-    public ComplexNumber(double r_input, double ri_input){
-        r=r_input;
-        ri=ri_input;
+    public ComplexNumber(double real, double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public double getReal(){
+        return real;
+    }
+
+    public double getImaginary(){
+        return imaginary;
     }
 
     /**
-     *
      * @return String format "a + bi"
      */
-    public String toString(){
-        if (r==0) return ri+"i";
-        if (ri==0) return Double.toString(r);
-        if (ri < 0) return r+"-"+(-ri)+"i";
-        return r+"+"+ri+"i";
+    public String toString() {
+        if (real == 0) return imaginary + "i";
+        if (imaginary == 0) return Double.toString(real);
+        if (imaginary < 0) return real + "-" + (-imaginary) + "i";
+        return real + "+" + imaginary + "i";
     }
 
     /**
-     *
      * @return the euclidian Norm of the vector representing the complex number
      */
-    public double abs(){
-        return Math.sqrt((r*r)+(ri+ri));
+    public double abs() {
+        return Math.sqrt((real * real) + (imaginary + imaginary));
     }
 
     /**
      * Adds two complex numbers
+     *
      * @param other @ComplexNumber object
      * @return a new @ComplexNumber object representing the sum of two complex numbers
      */
-    public ComplexNumber add(ComplexNumber other){
-        double r_tmp=this.r + other.r;
-        double ri_tmp=this.ri + other.ri;
-        return new ComplexNumber(r_tmp,ri_tmp);
+    public ComplexNumber add(ComplexNumber other) {
+        double r_tmp = this.real + other.real;
+        double ri_tmp = this.imaginary + other.imaginary;
+        return new ComplexNumber(r_tmp, ri_tmp);
     }
 
     /**
      * Subtracts two complex numbers
+     *
      * @param other @ComplexNumber object
      * @return a new @ComplexNumber object representing the difference of two complex numbers
      */
-    public ComplexNumber subtract(ComplexNumber other){
-        double r_tmp=this.r - other.r;
-        double ri_tmp=this.ri - other.ri;
-        return new ComplexNumber(r_tmp,ri_tmp);
+    public ComplexNumber subtract(ComplexNumber other) {
+        double r_tmp = this.real - other.real;
+        double ri_tmp = this.imaginary - other.imaginary;
+        return new ComplexNumber(r_tmp, ri_tmp);
     }
 
     /**
      * Multiplies two complex numbers
+     *
      * @param other @ComplexNumber object
      * @return a new @ComplexNumber object representing the product of two complex numbers
      */
-    public ComplexNumber multiply(ComplexNumber other){
-        double r_tmp=this.r*other.r-this.ri*other.ri;
-        double ri_tmp=this.r*other.ri+this.ri*other.r;
-        return new ComplexNumber(r_tmp,ri_tmp);
+    public ComplexNumber multiply(ComplexNumber other) {
+        double r_tmp = this.real * other.real - this.imaginary * other.imaginary;
+        double ri_tmp = this.real * other.imaginary + this.imaginary * other.real;
+        return new ComplexNumber(r_tmp, ri_tmp);
     }
 
     /**
-     *
      * @param other ComplexNumber object
      * @return 0 if both are equal, -1 if the other number is  smaller and 1 otherwise
      */
-    public int equals(ComplexNumber other){
+    public int equals(ComplexNumber other) {
         return Double.compare(this.abs(), other.abs());
     }
 

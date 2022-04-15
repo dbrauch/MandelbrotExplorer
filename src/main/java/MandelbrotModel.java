@@ -26,15 +26,15 @@ public class MandelbrotModel {
      */
     public static Color isInSetWithRGB(ComplexNumber c, int iterations){
         ComplexNumber z = z0;
-        double zrttp = z.r*z.r;
-        double zrittp = z.ri*z.ri;
+        double zrttp = z.getReal()*z.getReal();
+        double zrittp = z.getImaginary()*z.getImaginary();
         for (int i=0;i<iterations;i++){
             if (zrttp+zrittp>=4.0){
                 return new Color(((i+i%32)%256),((i+i%64)%256),((i+i%128)%256));
             }
             z=z.multiply(z).add(c);
-            zrttp=z.r*z.r;
-            zrittp = z.ri*z.ri;
+            zrttp=z.getReal()*z.getReal();
+            zrittp = z.getImaginary()*z.getImaginary();
         }
         return new Color(255,255,255);
     }
@@ -54,8 +54,8 @@ public class MandelbrotModel {
      */
     public static ComplexNumber PixelToComplexNumber(int x, int y, ComplexNumber centrePoint, double magnifier, int height, int width){
         return new ComplexNumber(
-                centrePoint.r+ x * (x_ratio/magnifier)/width,
-                centrePoint.ri-(y * (y_ratio/magnifier)/height)*2);
+                centrePoint.getReal()+ x * (x_ratio/magnifier)/width,
+                centrePoint.getImaginary()-(y * (y_ratio/magnifier)/height)*2);
     }
 
     /**
@@ -66,11 +66,11 @@ public class MandelbrotModel {
      * @param image an Image object being manipulated
      */
     public static void createMandelbrotImg(ComplexNumber centrePoint, int iterations, double m, Image image) {
-        IntStream.range(0, image.x).parallel().forEach((int i)->
-            IntStream.range(0, image.y).parallel().forEach((int j)->
+        IntStream.range(0, image.getX()).parallel().forEach((int i)->
+            IntStream.range(0, image.getY()).parallel().forEach((int j)->
                     image.set(i,j,isInSetWithRGB(new ComplexNumber(
-                            centrePoint.r  -(x_ratio/m)/ image.x + i * (x_ratio/m)/ image.x,
-                            centrePoint.ri + 2*(y_ratio/m)/ image.y-(j * (y_ratio/m)/ image.y)*2),
+                            centrePoint.getReal()  -(x_ratio/m)/ image.getX() + i * (x_ratio/m)/ image.getX(),
+                            centrePoint.getImaginary() + 2*(y_ratio/m)/ image.getY()-(j * (y_ratio/m)/ image.getY())*2),
                             iterations)
         )));
     }
@@ -86,8 +86,8 @@ public class MandelbrotModel {
      */
     public static void make(int width, int height, int i, double m, ComplexNumber centrePoint) throws IOException {
         createMandelbrotImg(new ComplexNumber(
-                centrePoint.r-(x_ratio/m)/2,
-                centrePoint.ri+2*(y_ratio/m)/2
+                centrePoint.getReal()-(x_ratio/m)/2,
+                centrePoint.getImaginary()+2*(y_ratio/m)/2
         ),i,m, image);
     }
 

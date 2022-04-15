@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getClassLoader().getResource("View.fxml"))));
         primaryStage.setTitle("Mandelbrot");
         primaryStage.setScene(new Scene(root, 512, 640));

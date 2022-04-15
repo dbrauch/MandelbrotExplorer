@@ -11,9 +11,6 @@ import java.io.IOException;
 
 public class Controller {
 
-    public AnchorPane anchorpane;
-    public Button setViewButton;
-    public Button saveAsPngButton;
     @FXML
     private TextField xCoordinateText;
     @FXML
@@ -46,8 +43,8 @@ public class Controller {
      */
     public void checkInputMagnifier() {
         try {
-            if (Double.parseDouble(magnifierText.getText())<=0){
-                magnifierText.setText(String.valueOf(Double.parseDouble(magnifierText.getText())*(-1)));
+            if (Double.parseDouble(magnifierText.getText()) <= 0) {
+                magnifierText.setText(String.valueOf(Double.parseDouble(magnifierText.getText()) * (-1)));
             }
 
         } catch (Exception e) {
@@ -66,6 +63,7 @@ public class Controller {
 
     /**
      * checks the input of a text field for the correct format
+     *
      * @param textfield a TextField object containing the text
      */
     public void checkInputForDouble(TextField textfield) {
@@ -82,6 +80,7 @@ public class Controller {
 
     /**
      * Listener for enter key, updates the image if enter is pressed
+     *
      * @param ke a KeyEvent
      * @throws IOException
      */
@@ -93,6 +92,7 @@ public class Controller {
 
     /**
      * Event Listener for scrolling, updates the image depending on level of magnification
+     *
      * @param e an event object
      * @throws IOException
      */
@@ -124,6 +124,7 @@ public class Controller {
 
     /**
      * Event Listener for Mouse dragging, updates the global pointer coordinates
+     *
      * @param e MouseEvent object
      * @throws IOException
      */
@@ -136,8 +137,8 @@ public class Controller {
                 new ComplexNumber(Double.parseDouble(xCoordinateText.getText()),
                         Double.parseDouble(yCoordinateText.getText())), Double.parseDouble(magnifierText.getText()),
                 (int) img.getFitHeight(), (int) img.getFitWidth());
-        xCoordinateText.setText(Double.toString(newCentrePoint.r));
-        yCoordinateText.setText(Double.toString(newCentrePoint.ri));
+        xCoordinateText.setText(Double.toString(newCentrePoint.getReal()));
+        yCoordinateText.setText(Double.toString(newCentrePoint.getImaginary()));
         if (dragCount % 4 == 0) {
             setViewMultiThreaded();
         }
@@ -148,6 +149,7 @@ public class Controller {
 
     /**
      * EventListener for MouseEvent, updates the global pointer position
+     *
      * @param e
      */
     public void imgClick(MouseEvent e) {
@@ -157,6 +159,7 @@ public class Controller {
 
     /**
      * Calls the Mandelbrot calculation operation and redraws the image.
+     *
      * @throws IOException
      */
     public void setViewMultiThreaded() throws IOException {
@@ -172,6 +175,7 @@ public class Controller {
 
     /**
      * Saves the current image as png file with a unique file name
+     *
      * @throws IOException
      */
     @FXML
