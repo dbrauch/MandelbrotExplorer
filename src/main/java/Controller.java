@@ -2,6 +2,7 @@
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -11,6 +12,8 @@ import java.io.IOException;
 
 public class Controller {
 
+    @FXML
+    public Label fpsLabel;
     @FXML
     private TextField xCoordinateText;
     @FXML
@@ -25,6 +28,10 @@ public class Controller {
     private static int scrollCount = 0;
     private static double pointerXStart;
     private static double pointerYStart;
+
+    private static int frameCounter = 0;
+
+    private static long timeOfLastSecond = System.currentTimeMillis();
 
 
     /**
@@ -170,7 +177,19 @@ public class Controller {
         int width = 512;
         int height = 512;
         MandelbrotModel.make(width, height, i, magfac, new ComplexNumber(x, y));
+        redraw();
+    }
+
+    public void redraw() {
         img.setImage(SwingFXUtils.toFXImage(MandelbrotModel.getImage().getBufImg(), null));
+        frameCounter++;
+        long tmpTime = System.currentTimeMillis();
+        if (tmpTime >= timeOfLastSecond + 1000) {
+
+            fpsLabel.setText("fps: " + frameCounter/((tmpTime-timeOfLastSecond)/1000));
+            frameCounter = 0;
+            timeOfLastSecond = System.currentTimeMillis();
+        }
     }
 
     /**

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<?import javafx.scene.control.Label?>
 <AnchorPane fx:id="anchorpane" focusTraversable="true" maxHeight="640" maxWidth="512" minHeight="640.0"
             minWidth="512.0" prefHeight="640.0" prefWidth="512.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
@@ -19,9 +20,9 @@
                onKeyPressed="#textEnter" prefHeight="28.0" prefWidth="100.0" promptText="magnification (default 1.5)"/>
     <Button fx:id="saveAsPngButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#saveImage"
             text="Save as PNG"/>
-
     <ImageView fx:id="img" onScroll="#scrollZoomSetView" onMouseDragged="#imgMouseDrag" onMousePressed="#imgClick"
                fitHeight="512.0" fitWidth="512.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
     </ImageView>
+    <Label fx:id="fpsLabel" text="fps: " layoutX="14.0" layoutY="80.0" prefHeight="28.0" prefWidth="100.0"/>
 </AnchorPane>
