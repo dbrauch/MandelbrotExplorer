@@ -121,7 +121,7 @@ public class Controller {
             case 0:
                 break;
         }
-        if (scrollCount % 8 == 0) {
+        if (scrollCount % 8*Double.parseDouble(magnifierText.getText()) == 0) {
             setViewMultiThreaded();
             scrollCount = 0;
         }
@@ -146,7 +146,9 @@ public class Controller {
                 (int) img.getFitHeight(), (int) img.getFitWidth());
         xCoordinateText.setText(Double.toString(newCentrePoint.getReal()));
         yCoordinateText.setText(Double.toString(newCentrePoint.getImaginary()));
-        if (dragCount % 4 == 0) {
+
+
+        if (dragCount % 4*Double.parseDouble(magnifierText.getText()) == 0) {
             setViewMultiThreaded();
         }
         dragCount++;
